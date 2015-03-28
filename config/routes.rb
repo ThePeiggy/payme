@@ -3,4 +3,5 @@ Myapp::Application.routes.draw do
 
   get "home/landing"
 
+  resources :bills, only: [:update, :show]
 end
