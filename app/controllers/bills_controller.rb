@@ -9,9 +9,19 @@ class BillsController < ApplicationController
     redirect_to bill_path(@bill), notice: "Success"
   end
 
+  def unused_bill
+    @bill = Bill.find_by(initial_balance: nil)
+    if @bill
+      redirect_to bill_path(@bill)
+    else
+      redirect_to root_path, notice: "Error"
+    end
+  end
+
   private
 
   def bill_params
     params.require(:bill).permit(:initial_balance)
   end
 end
+
