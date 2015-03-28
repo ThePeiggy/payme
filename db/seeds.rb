@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Bill.create(public_key: "1FKFwaN8UBLDjvFKJikfxzWpvKqmnkEXRC", private_key: "L32sZdW1oxxEytQmLjKbUKYgUbQ7qCtF2nTPdea9LiesBPmN7ag3", qr_name: "test")
-Bill.create(public_key: "166SCuDR5t77mlpJyjEJiHPQcrVEtF29JB", private_key: "KxzioLCutHp57bGjXLJ9ikp3NuFmtzxfgtnqPhwXSRSydyNuFCic", qr_name: "test2")
+Bill.create(public_key: "166SCuDR5t77m1pJyjEJiHPQcrVEtF29JB", private_key: "KxzioLCutHp57bGjXLJ9ikp3NuFmtzxfgtnqPhwXSRSydyNuFCic", qr_name: "test2")
 Bill.create(public_key: "12dDuC7zFUZYCkyegyCzLLPLiv3bcoNZPH", private_key: "KxjbvZduTEnhipjAwQLiafxTUFgoe6yUwXnoTWLtoe1H2MeoYZZY", qr_name: "test3")
 Bill.create(public_key: "12pZNkLupJTGhgA7vPDK5FHcMiGWeXqaX3", private_key: "LiFMGaGLKUwVT5hCPxxsLcFhLwFcavz2g397Dj6x8g6fxeX9osiR", qr_name: "test4")
 Bill.create(public_key: "17mV61tYhTbbDgfCETMsEGwqM6wAPUwfhr", private_key: "KzfcTP1oK8FZ9zB3ohn7QvsQqr443wTEajSzTiVotY6T7Svs997Z", qr_name: "test5")
