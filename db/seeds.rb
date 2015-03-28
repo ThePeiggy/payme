@@ -9,4 +9,3 @@
 Bill.create(public_key: "1FKFwaN8UBLDjvFKJikfxzWpvKqmnkEXRC", private_key: "L32sZdW1oxxEytQmLjKbUKYgUbQ7qCtF2nTPdea9LiesBPmN7ag3", qr_name: "test")
 Bill.create(public_key: "test2", private_key: "test2", qr_name: "test2")
 Bill.create(public_key: "test3", private_key: "test3", qr_name: "test3")
-
