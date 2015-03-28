@@ -1,0 +1,5 @@
+<%= form_for @bill, url: bill_path(@bill) do |f| %>
+  <%= f.label "Initial Bitcoin Balance: " %>
+  <%= f.number_field :initial_balance %>
+  <%= f.submit "Button", class: "btn btn-large btn-success" %>
+<% end %>
