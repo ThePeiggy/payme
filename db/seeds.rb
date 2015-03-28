@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Bill.create(public_key: "test", private_key: "test", qr_name: "test")
+Bill.create(public_key: "test2", private_key: "test2", qr_name: "test2")
+Bill.create(public_key: "test3", private_key: "test3", qr_name: "test3")
