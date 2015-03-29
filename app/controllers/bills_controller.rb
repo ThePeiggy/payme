@@ -26,7 +26,7 @@ class BillsController < ApplicationController
         "Accept" => "application/json"
       },
       parameters:{
-        "text" => "This is a horrible experience!"
+        "text" => "This experience is horrible for all interns! You will hate it here"
       }
 
     @moodrating = response.body["score"]
@@ -51,37 +51,46 @@ class BillsController < ApplicationController
     iMidpoint = iMidValue + iGreen
 
     iPosition = (iMidValue * -1 * @moodrating + iMidpoint).to_i
-    background_obj = Paleta::Color.new(:hsl, iPosition, 100, 65)
+    background_obj = Paleta::Color.new(:hsl, iPosition, 100, 35)
     background = background_obj.hex.to_s
 
     canvas = Magick::Image.new(width, height){self.background_color = '#' + background}
     gc = Magick::Draw.new
 
-    #Title  
+    #Overlay translucent image
+    overlay_image = Magick::Image.read("app/assets/images/engi.png").first
+    overlay_image.alpha(Magick::ActivateAlphaChannel)
+    # oimg_fac = 3
+    overlay_image.resize!(5)
+    canvas.composite!(overlay_image, 0, 0, Magick::OverCompositeOp)
+
+    #Overlay the QR Code
+    #TODO: Randomize a number from 1 to 8 to use for the bitcoin wallet stuff
+    overlay = Magick::Image.read("app/assets/images/b1_pri.jpg").first 
+    overlay.resize!(resize_factor)
+    canvas.composite!(overlay, 120, 50, Magick::OverCompositeOp)
+
+     #Title  
     gc.pointsize(height / 7)
     gc.font_weight(title_weight);
-    gc.text(0, height / 10 * 6, "Damien Siegfried".center(14))
+    gc.text(120, height / 10 * 6.9, "Damien Siegfried")
     gc.draw(canvas)
 
     #Subtitle
     gc.pointsize(height / 12)
     gc.font_weight(subtitle_weight);
-    gc.text(120, height / 10 * 7.3, "VP Advocate".center(14))
+    gc.text(120, height / 10 * 8, "VP Advocate")
     gc.draw(canvas)
 
     #Company
     gc.pointsize(height / 14)
     gc.font_weight(subtitle_weight);
-    gc.text(120, height / 10 * 8.4, "Sartorial Centrifuge".center(14))
+    gc.text(120, height / 10 * 9, "Sartorial Centrifuge")
     gc.draw(canvas)
 
-    #Overlay the image
-    #Randomize a number from 1 to 8 to use for the bitcoin wallet stuff
-    overlay = Magick::Image.read("public/b1_pri.jpg").first 
-    overlay.resize!(resize_factor)
-    canvas.composite!(overlay, width - 200 * resize_factor, 25, Magick::OverCompositeOp)
 
-    canvas.write('customBill.png')
+
+    canvas.write('app/assets/images/customBill.png')
 
     # send_data(canvas.to_blob, :disposition => 'inline', 
     #                          :type => 'image/png')
