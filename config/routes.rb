@@ -5,5 +5,6 @@ Myapp::Application.routes.draw do
 
   resources :bills, only: [:update, :show] do
   	get :unused_bill, on: :collection
+    get :bill_custom_create, on: :collection
   end
 end
