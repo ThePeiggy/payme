@@ -5,12 +5,12 @@ class BillsController < ApplicationController
 
   def update
     @bill = Bill.find(params[:id])
-    update_attributes(title: bill_params[:title])
+    @bill.update_attributes(title: bill_params[:title])
     success = @bill.add_credit(bill_params[:initial_balance])
     if success
-      redirect_to bill_path(@bill), notice: "Success"
+      redirect_to bill_custom_create_bills_path, notice: "Success"
     else
-      redirect_to bill_custom_create_bills_path, notice: "Error"
+      redirect_to bill_path(@bill), notice: "Error"
     end
   end
 
