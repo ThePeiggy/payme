@@ -10,7 +10,7 @@ class BillsController < ApplicationController
     redirect_to bill_path(@bill), notice: (success ? "Success" : "Error")
   end
 
-  def bill_custom_create
+  def bill_custom_create  
     width = 2000;
     height = 1000; 
     title_weight = 9000;
@@ -26,7 +26,7 @@ class BillsController < ApplicationController
         "Accept" => "application/json"
       },
       parameters:{
-        "text" => "I am just so happy!"
+        "text" => "This is a horrible experience!"
       }
 
     @moodrating = response.body["score"]
@@ -51,21 +51,22 @@ class BillsController < ApplicationController
     iMidpoint = iMidValue + iGreen
 
     iPosition = (iMidValue * -1 * @moodrating + iMidpoint).to_i
-    background = Paleta::Color.new(:hsl, iPosition, 100, 75)
+    background_obj = Paleta::Color.new(:hsl, iPosition, 100, 65)
+    background = background_obj.hex.to_s
 
-    canvas = Magick::Image.new(width, height){self.background_color = '#45A0D6'}
+    canvas = Magick::Image.new(width, height){self.background_color = '#' + background}
     gc = Magick::Draw.new
 
     #Title  
     gc.pointsize(height / 7)
     gc.font_weight(title_weight);
-    gc.text(0, height / 10 * 6, "Amy Xiao".center(14))
+    gc.text(0, height / 10 * 6, "Damien Siegfried".center(14))
     gc.draw(canvas)
 
     #Subtitle
     gc.pointsize(height / 12)
     gc.font_weight(subtitle_weight);
-    gc.text(120, height / 10 * 7.3, "Terminal badass".center(14))
+    gc.text(120, height / 10 * 7.3, "VP Advocate".center(14))
     gc.draw(canvas)
 
     #Company
@@ -75,11 +76,15 @@ class BillsController < ApplicationController
     gc.draw(canvas)
 
     #Overlay the image
-    #overlay = Magick::Image.read(qr_code).first 
-    #overlay.resize!(resize_factor)
-    #canvas.composite!(overlay, width - 200 * resize_factor, 25, Magick::OverCompositeOp)
+    #Randomize a number from 1 to 8 to use for the bitcoin wallet stuff
+    overlay = Magick::Image.read("assets/b1_pri.jpg").first 
+    overlay.resize!(resize_factor)
+    canvas.composite!(overlay, width - 200 * resize_factor, 25, Magick::OverCompositeOp)
 
     canvas.write('customBill.png')
+
+    # send_data(canvas.to_blob, :disposition => 'inline', 
+    #                          :type => 'image/png')
     #///////////////////////////////////////////////////////////////
   end
 
