@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20150328141904) do
     t.string   "private_key",     null: false
     t.string   "qr_name",         null: false
     t.float    "initial_balance"
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

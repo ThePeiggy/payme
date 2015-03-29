@@ -5,14 +5,14 @@ class BillsController < ApplicationController
 
   def update
     @bill = Bill.find(params[:id])
+    update_attributes(title: bill_params[:title])
     success = @bill.add_credit(bill_params[:initial_balance])
-
     redirect_to bill_path(@bill), notice: (success ? "Success" : "Error")
   end
 
   def bill_custom_create
     width = 2000;
-    height = 1000; 
+    height = 1000;
     title_weight = 9000;
     subtitle_weight = 500;
     resize_factor = 3;
@@ -56,7 +56,7 @@ class BillsController < ApplicationController
     canvas = Magick::Image.new(width, height){self.background_color = '#45A0D6'}
     gc = Magick::Draw.new
 
-    #Title  
+    #Title
     gc.pointsize(height / 7)
     gc.font_weight(title_weight);
     gc.text(0, height / 10 * 6, "Amy Xiao".center(14))
@@ -75,7 +75,7 @@ class BillsController < ApplicationController
     gc.draw(canvas)
 
     #Overlay the image
-    #overlay = Magick::Image.read(qr_code).first 
+    #overlay = Magick::Image.read(qr_code).first
     #overlay.resize!(resize_factor)
     #canvas.composite!(overlay, width - 200 * resize_factor, 25, Magick::OverCompositeOp)
 
@@ -95,10 +95,9 @@ class BillsController < ApplicationController
   private
 
   def bill_params
-    params.require(:bill).permit(:initial_balance)
+    params.require(:bill).permit(:initial_balance, :title)
   end
 
-  
 
 end
 

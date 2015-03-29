@@ -5,6 +5,7 @@ class CreateBills < ActiveRecord::Migration
       t.string :private_key, null: false
       t.string :qr_name, null: false
       t.float  :initial_balance
+      t.string :title
 
       t.timestamps
     end
