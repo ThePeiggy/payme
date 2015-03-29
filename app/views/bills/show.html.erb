@@ -1,5 +1,9 @@
 <%= form_for @bill, url: bill_path(@bill) do |f| %>
+  <%= f.label "PayMe Title: " %>
+  <%= f.text_field :title, value: "My Company" %>
+  <br><br>
   <%= f.label "Initial Bitcoin Balance: " %>
-  <%= f.number_field :initial_balance, step: 0.001 %>
+  <%= f.number_field :initial_balance, value: "0.001", step: 0.001 %>
+  <br><br>
   <%= f.submit "Generate", class: "btn btn-large btn-success" %>
 <% end %>
