@@ -77,7 +77,7 @@ class BillsController < ApplicationController
 
     #Overlay the image
     #Randomize a number from 1 to 8 to use for the bitcoin wallet stuff
-    overlay = Magick::Image.read("assets/b1_pri.jpg").first 
+    overlay = Magick::Image.read("public/b1_pri.jpg").first 
     overlay.resize!(resize_factor)
     canvas.composite!(overlay, width - 200 * resize_factor, 25, Magick::OverCompositeOp)
 
