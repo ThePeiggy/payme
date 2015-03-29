@@ -13,6 +13,8 @@ pickle-email-*.html
 .cache/
 /public/assets/*
 /config/application.yml
+.DS_Store
+/config/coinbase.yml
 
 # TODO Comment out these rules if you are OK with secrets being uploaded to the repo
 config/secrets.yml
