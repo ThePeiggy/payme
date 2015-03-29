@@ -79,11 +79,9 @@ class BillsController < ApplicationController
     #overlay.resize!(resize_factor)
     #canvas.composite!(overlay, width - 200 * resize_factor, 25, Magick::OverCompositeOp)
 
-    canvas.write('tst.png')
-    redirect_to 
+    canvas.write('customBill.png')
     #///////////////////////////////////////////////////////////////
   end
-
 
   def unused_bill
     @bill = Bill.find_by(initial_balance: nil)
