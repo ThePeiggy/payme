@@ -57,16 +57,23 @@ class BillsController < ApplicationController
     canvas = Magick::Image.new(width, height){self.background_color = '#' + background}
     gc = Magick::Draw.new
 
+    #Overlay the QR Code
+    #rng = Random.new(122342354)
+    #TODO: Randomize a number from 1 to 8 to use for the bitcoin wallet stuff
+    wallet_n = (rand() * 8) + 1 
+    #Randomize number from 1 to 6 to use for the background randomization
+    bg_n = (rand() * 6) + 1 
+
     #Overlay translucent image
-    overlay_image = Magick::Image.read("app/assets/images/engi.png").first
+    overlay_image = Magick::Image.read("app/assets/images/bg" + bg_n.to_i.to_s + ".png").first
     overlay_image.alpha(Magick::ActivateAlphaChannel)
     # oimg_fac = 3
     overlay_image.resize!(5)
     canvas.composite!(overlay_image, 0, 0, Magick::OverCompositeOp)
 
-    #Overlay the QR Code
-    #TODO: Randomize a number from 1 to 8 to use for the bitcoin wallet stuff
-    overlay = Magick::Image.read("app/assets/images/b1_pri.jpg").first 
+   
+
+    overlay = Magick::Image.read("app/assets/images/b" + wallet_n.to_i.to_s + "_pri.jpg").first 
     overlay.resize!(resize_factor)
     canvas.composite!(overlay, 120, 50, Magick::OverCompositeOp)
 
@@ -92,9 +99,6 @@ class BillsController < ApplicationController
 
     canvas.write('app/assets/images/customBill.png')
 
-    # send_data(canvas.to_blob, :disposition => 'inline', 
-    #                          :type => 'image/png')
-    #///////////////////////////////////////////////////////////////
   end
 
   def unused_bill
